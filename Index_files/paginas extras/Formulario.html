@@ -1,0 +1,184 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0088)https://usuaris.tinet.cat/acl/html_web/manual/formularios/jscript/validar/ejemplo_4.html -->
+<html><!-- Mirrored from www.htmlweb.net/manual/formularios/jscript/validar/ejemplo_4.html by HTTrack Website Copier/3.x [XR&CO'2004], Wed, 29 Sep 2004 15:00:59 GMT --><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+	<title>formularios - Validación - ejemplo 4</title>
+   <script language="JavaScript" type="text/javascript">
+
+<!-- Begin
+var emailAddress="mi direcci&oacute;n e-mail";
+function toName()
+     {
+var toNameval=document.forms[0].elements[1].value;
+toNameval = "mailto:youre-mailaddress.com?subject=Guest Book example";
+this.document.mail.action = toNameval;
+}
+function Reset() {
+document.forms[0].elements[0].value = "";
+document.forms[0].elements[1].value = "";
+document.forms[0].elements[2].value = navigator.appName + " " + navigator.appVersion;  
+document.forms[0].elements[3].value = "";
+document.forms[0].elements[4].value = "";
+document.forms[0].elements[5].value = "";
+document.forms[0].elements[0].focus();
+}
+function submitForms() {
+if ( (isName() ) && (isEmail()) && (isBrowser()) && (isCountry()) && (isComment()) && (isFavorite()) )
+if (confirm("\nVa a enviar ahora los datos del formulario.\n\nClick en YES para enviar\n\nClick en NO para cancelar."))
+{ 
+alert("\nLos datos van a ser enviados a :\n\n"+emailAddress+"\n\n\nGracias!");
+return true;
+}
+else
+{
+alert("\nHa escogido cancelar en env&iacute;o de datos.");
+return false;      
+}
+else
+return false;
+}
+function isName() {
+var str = document.forms[0].elements[0].value;
+if (str == "") {
+alert("\nEl campo Nombre est&aacute; vac&iacute;o.\n\nPor favor, entre su nombre.")
+document.forms[0].elements[0].focus();
+return false;
+}
+for (var i = 0; i < str.length; i++) 
+{
+var ch = str.substring(i, i + 1);
+if (((ch < "a" || "z" < ch) && (ch < "A" || "Z" < ch)) && ch != ' ') 
+{
+alert("\nEl campo nombre s&oacute;lo admite letras y espacios.\n\nPor favor, vuelva a introducir su nombre.");
+document.forms[0].elements[0].select();
+document.forms[0].elements[0].focus();
+return false;
+   }
+}
+return true;
+}
+function isEmail()
+{
+emailAddress=document.forms[0].elements[1].value;
+if (document.forms[0].elements[1].value == "") {
+alert("\nEl campo e-mail est&aacute; en blanco.\n\nPor favor, entre su direcci&oacute;n de e-mail.")
+document.forms[0].elements[1].focus();
+return false; 
+}
+if (document.forms[0].elements[1].value.indexOf ('@',0) == -1 || 
+document.forms[0].elements[1].value.indexOf ('.',0) == -1)
+{
+alert("\nEl campo e-mail requiere un signo \"@\" y un \".\"para ser correcto\n\nPor favor, entre de nuevo su direcci&oacute;n de e-mail.")
+document.forms[0].elements[1].select();
+document.forms[0].elements[1].focus();
+return false;
+}
+else
+{
+toName();
+return true;
+}
+}
+function isBrowser()
+{
+if (document.forms[0].elements[2].value != navigator.appName + " " + navigator.appVersion)
+{
+if (confirm("\nHa cambiado de navegador.\n\nClick en OK para mantener los cambios.\n\nClick en Cancel para restaurar el navegador inicial.")) 
+return true
+else
+{
+document.forms[0].elements[2].value = navigator.appName + " " + navigator.appVersion;
+return true;      
+   }
+}
+else
+return true;
+}
+function isCountry() {
+var str = document.forms[0].elements[3].value;
+if (str == "") {
+alert("\nEl campo Pa&iacute;s est&aacute; en blanco.\n\nPor favor, introduzca su pa&iacute;s.")
+document.forms[0].elements[3].focus();
+return false;
+}
+for (var i = 0; i < str.length; i++) {
+var ch = str.substring(i, i + 1);
+if (((ch < "a" || "z" < ch) && (ch < "A" || "Z" < ch)) && ch != ' ') 
+{
+alert("\nEl campo Pa&iacute;s s&oacute;lo admite letras y espacios.\n\nPor favor, vuelva a introducir su pa&iacute;s");
+document.forms[0].elements[3].select();
+document.forms[0].elements[3].focus();
+return false;
+   }
+}
+return true;
+}
+function isComment() {
+if (document.forms[0].elements[4].value == "") {
+if (confirm("\nVa a enviar el formulario sin hacer un comentario.\n\nClick en CANCEL para incluir un comentario.\n\nClick en OK para continuar sin escribir comentario")) 
+return true
+else
+{
+document.forms[0].elements[4].focus();
+return false;      
+}
+}
+else
+return true   
+}
+function isFavorite() {
+if (document.forms[0].elements[5].value == "") {
+if (confirm("\nVa a enviar el formulario sin hacer constar sus sitios web preferidos.\n\nClick en CANCEL para incluir sus favoritos.\n\nClick en OK para continuar sin incluirlos")) 
+return true
+else
+{
+document.forms[0].elements[5].focus();
+return false;      
+   }
+}
+else
+return true   
+}
+// End -->
+</script>
+
+</head>
+
+<body onload="Reset();">
+<center>
+<form enctype="text/plain" name="mail" method="GET" action="mailto:youremailaddress" onsubmit="return submitForms()">
+<table border="0" width="400">
+<tbody><tr>
+<td align="center"> <font color="800000"><strong>Nombre:</strong></font></td>
+<td align="center"> <font color="800000"><strong>E-mail</strong></font></td>
+</tr>
+<tr>
+<td align="center"> <input type="text" name="name" size="30" maxlength="40"></td>
+
+<td align="center"> <input type="text" name="email" size="30" maxlength="40"></td>
+</tr>
+<tr>
+<td align="center"> <font color="800000"><strong>Navegador usado: </strong></font></td>
+<td align="center"> <font color="800000"><strong>País:</strong></font></td>
+</tr>
+<tr>
+<td align="center"> <input type="text" name="browser" size="30" maxlength="60"></td>
+<td align="center"> <input type="text" name="country" size="30" maxlength="60">
+</td>
+</tr>
+</tbody></table>
+<center> 
+<font color="800000"><strong>Comentario:</strong> </font><br>
+<textarea name="comments" rows="5" cols="50" wrap="yes">?Comentarios?  ?Sugerencias?</textarea><p></p><p>
+<font color="800000"><strong>Sus sitios web favoritos:</strong></font><br>
+<textarea name="favorites" rows="5" cols="50" wrap="yes">?Qué sitios web son sus preferidos?</textarea>
+</p><p></p><p>
+<input type="submit" value="enviar"></p><center><input type="reset" value="borrar" onclick="Reset()">
+
+</center>
+
+
+
+
+<!-- Mirrored from www.htmlweb.net/manual/formularios/jscript/validar/ejemplo_4.html by HTTrack Website Copier/3.x [XR&CO'2004], Wed, 29 Sep 2004 15:00:59 GMT -->
+
+</center></form></center></body></html>
